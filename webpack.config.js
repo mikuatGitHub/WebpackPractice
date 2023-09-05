@@ -1,9 +1,11 @@
-// node.jsのライブラリpathを利用
+// node.jsのライブラリpath
 const path= require("path");
 // css生成のためのプラグイン
 const MiniCssExtractPlugin= require("mini-css-extract-plugin");
 // html生成のためのプラグイン
 const HtmlWebpackPlugin= require("html-webpack-plugin");
+// dist不要ファイル削除のためのプラグイン、{}クラスのみ読み込み
+const { CleanWebpackPlugin }= require("clean-webpack-plugin");
 
 // エントリーポイント＝初めに見るindexとなるファイル、ビルドする出力先
 // module.exports= {
@@ -17,9 +19,10 @@ const HtmlWebpackPlugin= require("html-webpack-plugin");
 // メソッドpath.resolveで絶対PATH取得、__dirnameはプロジェクトファイル位置
 // moduleオプション、test条件ファイル名.css検知したとき、//正規表現で.をエスケープするため\.としている、use命令"css-loader"を使用、loaderは下から読み込まれるので注意
 module.exports= {
-  entry: "./src/index.js",
+  entry: "./src/javascripts/main.js",
   output: {
     path: path.resolve(__dirname,'./dist'),
+    filename: "javascripts/main.js",
   },
   module: {
     rules: [
@@ -40,9 +43,12 @@ module.exports= {
     ]
   },
   plugins:[
-    new MiniCssExtractPlugin(),
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
+    new MiniCssExtractPlugin({
+      filename: './stylesheets/main.css'
     }),
+    new HtmlWebpackPlugin({
+      template: './src/templates/index.html',
+    }),
+    new CleanWebpackPlugin(),
   ],
 }
