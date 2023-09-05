@@ -1,5 +1,9 @@
 // node.jsのライブラリpathを利用
 const path= require("path");
+// css生成のためのプラグイン
+const MiniCssExtractPlugin= require("mini-css-extract-plugin");
+// html生成のためのプラグイン
+const HtmlWebpackPlugin= require("html-webpack-plugin");
 
 // エントリーポイント＝初めに見るindexとなるファイル、ビルドする出力先
 // module.exports= {
@@ -22,8 +26,11 @@ module.exports= {
       {
         test: /\.css/,
         use: [
+          // {
+          //   loader: 'style-loader'
+          // },
           {
-            loader: 'style-loader'
+            loader: MiniCssExtractPlugin.loader
           },
           {
             loader: 'css-loader'
@@ -31,5 +38,11 @@ module.exports= {
         ],
       }
     ]
-  }
+  },
+  plugins:[
+    new MiniCssExtractPlugin(),
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+    }),
+  ],
 }

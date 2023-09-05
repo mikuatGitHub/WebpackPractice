@@ -1,3 +1,4 @@
+// 動作確認用のファイル
 export default function(){
-  console.log("this is modeules>my.js");
+  console.log("hello from modeules>my.js");
 }
