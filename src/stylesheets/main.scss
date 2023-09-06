@@ -1,0 +1,29 @@
+// 「＠use」でfooter.scssの読み込み
+@use './footer.scss';
+
+// 「@mixin」関数定義 ↔「@include」から呼び出し
+@mixin set-margin($direction, $value){
+  margin-#{$direction}: $value;
+}
+
+// 素のCSS
+body{
+  color: lightblue;
+}
+
+// 変数定義
+$text-color: orange;
+
+// ネスト構造が使用可能
+// 「@extend」拡張、継承して使用
+.content{
+  .title{
+    font-size: 24px;
+    color: $text-color;
+  }
+  .title-lg{
+    @extend .title;
+    font-size: 32px;
+  }
+  @include set-margin(right, 16px);
+}
