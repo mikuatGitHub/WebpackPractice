@@ -23,7 +23,8 @@ module.exports= {
   entry: "./src/javascripts/main.js",
   output: {
     path: path.resolve(__dirname,'./dist'),
-    filename: 'javascripts/main.js',
+    // filename: 'javascripts/main.js',
+    filename: 'javascripts/[name]-[contenthash].js',
     publicPath: '/', //webpack5のassetmodulesエラー対策
   },
   module: {
@@ -79,7 +80,7 @@ module.exports= {
             loader: 'file-loader',
             options: {
               esModule: false,
-              name: 'images/[name].[ext]',
+              filename: 'images/[name]-[contenthash].[ext]',
             },
           },
           {
@@ -111,7 +112,7 @@ module.exports= {
   },
   plugins:[
     new MiniCssExtractPlugin({
-      filename: './stylesheets/main.css'
+      filename: './stylesheets/[name]-[hash].css'
     }),
     new HtmlWebpackPlugin({
       template: './src/templates/index.pug',
