@@ -19,6 +19,7 @@ const { CleanWebpackPlugin }= require("clean-webpack-plugin");
 // メソッドpath.resolveで絶対PATH取得、__dirnameはプロジェクトファイル位置
 // moduleオプション、test条件ファイル名.css検知したとき、//正規表現で.をエスケープするため\.としている、use命令"css-loader"を使用、loaderは下から読み込まれるので注意
 module.exports= {
+  devtool: 'source-map',
   entry: "./src/javascripts/main.js",
   output: {
     path: path.resolve(__dirname,'./dist'),
@@ -26,6 +27,21 @@ module.exports= {
   },
   module: {
     rules: [
+      {
+        test: /\.js/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options:{
+              presets: [
+                ['@babel/preset-env'],
+                '@babel/preset-react',
+              ]
+            }
+          }
+        ]
+      },
       {
         test: /\.(css|sass|scss)/,
         use: [
@@ -36,7 +52,10 @@ module.exports= {
             loader: MiniCssExtractPlugin.loader
           },
           {
-            loader: 'css-loader'
+            loader: 'css-loader',
+            options: {
+              sourceMap: false,
+            }
           },
           {
             loader: 'sass-loader'
@@ -44,13 +63,22 @@ module.exports= {
         ],
       },
       {
-        test: /\.(png|jpg)/,
+        test: /\.(png|jpg|jpeg)/,
         use: [
           {
             loader: 'file-loader',
             options: {
               esModule: false,
               name: 'images/[name].[ext]',
+            },
+          },
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              mozjpeg: {
+                progressive: true,
+                quality: 65,
+              },
             },
           },
         ]
