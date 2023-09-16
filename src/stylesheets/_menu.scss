@@ -1,0 +1,17 @@
+.menu{
+  display: flex;
+  margin-bottom: 4rem;
+  
+  // %__item = .menu__item
+  &__item{
+    margin-right: 0.5rem;
+    a{
+      padding: 0.5rem;
+      border-bottom: 4px solid #ddd;
+      text-decoration: none;
+      a:hover{
+        color: green;
+      }
+    }
+  }
+}

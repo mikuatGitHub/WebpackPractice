@@ -2,7 +2,7 @@
 import ReactDom from 'react-dom';
 import * as React from 'react';
 // Alert.tsxの読み込み
-import Alert from './Alert.tsx';
+import Alert from './_Alert.tsx';
 
 // コンポーネント定義
 const App = (props) =>{

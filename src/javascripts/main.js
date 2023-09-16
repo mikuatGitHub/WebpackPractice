@@ -1,8 +1,9 @@
+// 他ファイルを入力する
 // 相対PATH
 import './reactApp.jsx';
-import my from "./my.js";
+import my from "./_my.js";
 import "../stylesheets/main.scss";
-import add from './add.ts';
+import add from './_add.ts';
 
 console.log("hello from main.js");
 console.log(add(3, 9));

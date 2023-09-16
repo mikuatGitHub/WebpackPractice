@@ -23,7 +23,8 @@ module.exports= {
   entry: "./src/javascripts/main.js",
   output: {
     path: path.resolve(__dirname,'./dist'),
-    filename: "javascripts/main.js",
+    filename: 'javascripts/main.js',
+    publicPath: '/', //webpack5のassetmodulesエラー対策
   },
   module: {
     rules: [
